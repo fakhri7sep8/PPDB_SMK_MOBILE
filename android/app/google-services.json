@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "520274796198",
+    "project_id": "ppdb-mobile",
+    "storage_bucket": "ppdb-mobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520274796198:android:d535d2eaf05ae254fc9e67",
+        "android_client_info": {
+          "package_name": "com.example.ppdb_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoHkYYk8vFORsIB2LHqh0vA9bhpCOYsjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
