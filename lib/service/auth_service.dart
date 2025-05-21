@@ -5,16 +5,20 @@ import 'package:ppdb_mobile/core/routing/app_route.dart';
 
 class AuthService {
   // Login
-  Future<void> login(BuildContext context, String email, String password) async {
+  Future<void> login(
+    BuildContext context,
+    String email,
+    String password,
+  ) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login berhasil!')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Login berhasil!')));
 
       context.goNamed(Routes.home); // pastikan ini sesuai dengan nama rute home
     } on FirebaseAuthException catch (e) {
@@ -25,21 +29,30 @@ class AuthService {
         message = 'Password salah';
       }
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     }
   }
 
   // Register
-  Future<void> register(BuildContext context, String email, String password) async {
+  Future<void> register(
+    BuildContext context,
+    String email,
+    String password,
+    String name,
+  ) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      final userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Registrasi berhasil!')),
-      );
+      // Update displayName user
+      await userCredential.user?.updateDisplayName(name);
+      await userCredential.user?.reload(); // supaya data terbaru terbaca
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Registrasi berhasil!')));
 
       context.goNamed(Routes.login); // arahkan ke login setelah register
     } on FirebaseAuthException catch (e) {
@@ -50,7 +63,9 @@ class AuthService {
         message = 'Email sudah terdaftar';
       }
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     }
   }
 

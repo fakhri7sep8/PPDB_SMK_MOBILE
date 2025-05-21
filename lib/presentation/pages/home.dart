@@ -57,7 +57,6 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Container Pendaftaran
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
